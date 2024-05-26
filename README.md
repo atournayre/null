@@ -21,7 +21,6 @@ $title = Title::create('My title');
 $title->title; // 'My title'
 $title->isNull(); // false
 $title->isNotNull(); // true
-$title->mayBeNull(); // false
 ```
 
 #### Nullable case
@@ -34,7 +33,6 @@ $title = Title::asNull();
 $title->title; // 'Empty title'
 $title->isNull(); // true
 $title->isNotNull(); // false
-$title->mayBeNull(); // false
 ```
 
 #### Maybe nullable case
