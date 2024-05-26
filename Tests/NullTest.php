@@ -49,23 +49,14 @@ class NullTest extends TestCase
         self::assertTrue($title->isNull());
     }
 
-    public function testCanBeNullable(): void
-    {
-        $title = Title::create('My title');
-
-        self::assertFalse($title->isNull());
-
-        $title = $title->canBeNullable();
-
-        self::assertTrue($title->mayBeNull());
-    }
-
     public function testGetOrNull(): void
     {
         $title = Title::asNull();
         self::assertTrue($title->getOrNull()->isNull());
+        self::assertSame('Empty title', $title->getOrNull()->title);
 
         $title = Title::create('My title');
         self::assertTrue($title->getOrNull()->isNotNull());
+        self::assertSame('My title', $title->getOrNull()->title);
     }
 }

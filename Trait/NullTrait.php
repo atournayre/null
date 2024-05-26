@@ -35,14 +35,6 @@ trait NullTrait
         return $clone;
     }
 
-    public function canBeNullable(): self
-    {
-        $clone = clone $this;
-        $clone->null = NullEnum::MAYBE;
-
-        return $clone;
-    }
-
     public function isNull(): bool
     {
         return $this->null->yes();
@@ -51,11 +43,6 @@ trait NullTrait
     public function isNotNull(): bool
     {
         return $this->null->no();
-    }
-
-    public function mayBeNull(): bool
-    {
-        return $this->null->maybe();
     }
 
     public static function asNull(): self
