@@ -23,12 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Atournayre\\Component\\Null\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Atournayre\\Component\\Null\\Tests\\": "tests/"
+      "Atournayre\\Component\\Null\\": ""
     }
   }
 }

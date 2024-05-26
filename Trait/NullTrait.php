@@ -10,11 +10,16 @@ trait NullTrait
 {
     protected NullEnum $null;
 
-    public function __call($name, $arguments)
+    /**
+     * @param array<int, mixed> $arguments
+     */
+    public function __call(string $name, array $arguments): mixed
     {
         if ('__construct' === $name) {
             $this->initializeNull();
         }
+
+        return null;
     }
 
     private function initializeNull(?bool $isNull = null): void
@@ -61,8 +66,12 @@ trait NullTrait
         return $self;
     }
 
-    public function getOrNull(): ?self
+    public function getOrNull(): self
     {
-        return $this->null->maybe() ? null : $this;
+        if ($this->null->yes()) {
+            return $this::asNull();
+        }
+
+        return $this;
     }
 }
