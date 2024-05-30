@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Atournayre\Component\Null\Enum;
 
-use Atournayre\Component\Null\Trait\EnumTrait;
-
 enum NullEnum
 {
-    use EnumTrait;
-
     case YES;
     case NO;
 
