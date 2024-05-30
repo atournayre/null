@@ -4,26 +4,32 @@ declare(strict_types=1);
 
 namespace Atournayre\Component\Null\Enum;
 
-enum NullEnum
+class NullEnum
 {
-    case YES;
-    case NO;
+    private const YES = true;
+    private const NO = false;
+
+    private bool $bool;
+
+    private function __construct(bool $bool)
+    {
+        $this->bool = $bool;
+    }
 
     public function yes(): bool
     {
-        return self::YES === $this;
+        return $this->bool === true;
     }
 
     public function no(): bool
     {
-        return self::NO === $this;
+        return $this->bool === false;
     }
 
     public static function fromBool(bool $bool): self
     {
-        return match ($bool) {
-            true => self::YES,
-            false => self::NO,
-        };
+        $yesNo = $bool ? self::YES : self::NO;
+
+        return new self($yesNo);
     }
 }

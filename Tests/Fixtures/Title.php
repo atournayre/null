@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Atournayre\Component\Null\Tests\Fixtures;
 
 use Atournayre\Component\Null\Contracts\NullableInterface;
-use Atournayre\Component\Null\Trait\NullTrait;
+use Atournayre\Component\Null\Traits\NullTrait;
 
 final class Title implements NullableInterface
 {
     use NullTrait;
 
+    public string $title;
+
     private function __construct(
-        public readonly string $title,
+        string $title
     ) {
+        $this->title = $title;
         $this->initializeNull();
     }
 
