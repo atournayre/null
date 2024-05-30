@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atournayre\Component\Null\Traits;
+namespace Atournayre\Component\Null\Trait;
 
 use Atournayre\Component\Null\Enum\NullEnum;
 
@@ -13,7 +13,7 @@ trait NullTrait
     /**
      * @param array<int, mixed> $arguments
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): mixed
     {
         if ('__construct' === $name) {
             $this->initializeNull();
@@ -30,7 +30,7 @@ trait NullTrait
     public function toNullable(): self
     {
         $clone = clone $this;
-        $clone->null = NullEnum::fromBool(true);
+        $clone->null = NullEnum::YES;
 
         return $clone;
     }
@@ -48,7 +48,7 @@ trait NullTrait
     public static function asNull(): self
     {
         $self = new self();
-        $self->null = NullEnum::fromBool(true);
+        $self->null = NullEnum::YES;
 
         return $self;
     }
