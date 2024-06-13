@@ -14,5 +14,12 @@ interface NullableInterface
 
     public static function asNull(): self;
 
-    public function getOrNull(): ?self;
+    public function orNull(): ?self;
+
+    /**
+     * @return $this
+     *
+     * @throws \Throwable
+     */
+    public function orThrow(\Throwable|callable $throwable): self;
 }

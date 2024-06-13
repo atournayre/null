@@ -52,11 +52,31 @@ class NullTest extends TestCase
     public function testGetOrNull(): void
     {
         $title = Title::asNull();
-        self::assertTrue($title->getOrNull()->isNull());
-        self::assertSame('Empty title', $title->getOrNull()->title);
+        self::assertTrue($title->orNull()->isNull());
+        self::assertSame('Empty title', $title->orNull()->title);
 
         $title = Title::create('My title');
-        self::assertTrue($title->getOrNull()->isNotNull());
-        self::assertSame('My title', $title->getOrNull()->title);
+        self::assertTrue($title->orNull()->isNotNull());
+        self::assertSame('My title', $title->orNull()->title);
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function testOrThrow(): void
+    {
+        $title = Title::asNull();
+        self::expectException(\RuntimeException::class);
+        $title->orThrow(new \RuntimeException());
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function testOrThrowWithCallable(): void
+    {
+        $title = Title::asNull();
+        self::expectException(\RuntimeException::class);
+        $title->orThrow(fn () => new \RuntimeException());
     }
 }

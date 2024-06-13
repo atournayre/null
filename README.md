@@ -39,19 +39,32 @@ $title->isNotNull(); // false
 
 Before you used to have return type `?string` and now you can use `Title` object.
 
-If you are not sure if the value is null or not, you can use `getOrNull()` method, it's a replacement of `?->` operator.
+If you are not sure if the value is null or not, you can use `orNull()` method, it's a replacement of `?->` operator.
 
 ```php
 $title = Title::create('My title')
-    ->getOrNull()
+    ->orNull()
     ->title; // 'My title'
 ```
 
 
 ```php
 $title = Title::asNull()
-    ->getOrNull()
+    ->orNull()
     ->title; // 'Empty title'
+```
+
+Instead of using `orNull()` method, you can use `orThrow()` method to throw an exception if the value is null.
+
+```php
+$title = Title::asNull()
+    ->orThrow(new \RuntimeException('Title is null'));
+```
+
+`orThrow()` also accepts a callable to throw an exception with a custom message.
+```php
+$title = Title::asNull()
+    ->orThrow(fn () => new \RuntimeException('Title is null'));    
 ```
 
 

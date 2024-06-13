@@ -53,10 +53,26 @@ trait NullTrait
         return $self;
     }
 
-    public function getOrNull(): self
+    public function orNull(): self
     {
         if ($this->null->yes()) {
             return $this::asNull();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function orThrow(\Throwable|callable $throwable): self
+    {
+        if ($this->null->yes()) {
+            if ($throwable instanceof \Throwable) {
+                throw $throwable;
+            }
+
+            throw $throwable();
         }
 
         return $this;
